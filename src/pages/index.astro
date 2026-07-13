@@ -1,17 +1,169 @@
 ---
+import Layout from "../layouts/layout.astro";
+import About from "../components/about.astro";
+import Skills from "../components/skills.astro";
+import Formation from "../components/formation.astro";
+import Project from "../components/projects.astro";
 
+import Lightfall from "../components/Lightfall.jsx";
+import SplitText from "../components/SplitText.jsx";
+import GlareHover from "../components/GlareHover.jsx";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="KLEIN Julyan - Portfolio">
+	<header
+		id="navbar"
+		class="fixed w-full z-50 transition-all duration-300 bg-brand-bg/70 backdrop-blur-md border-b border-white/5"
+	>
+		<div
+			class="max-w-7xl mx-auto flex justify-between items-center px-6 py-5"
+		>
+			<div
+				class="text-2xl font-bold tracking-wider bg-gradient-to-r from-brand-purple to-brand-blue bg-clip-text text-transparent"
+			>
+				Portfolio
+			</div>
+			<nav
+				class="hidden md:flex items-center space-x-8 text-md font-medium"
+			>
+				<a
+					href="#hero"
+					class="hover:text-brand-purple transition-colors">Accueil</a
+				>
+				<a
+					href="#about"
+					class="hover:text-brand-purple transition-colors"
+					>À propos</a
+				>
+				<a
+					href="#formation"
+					class="hover:text-brand-purple transition-colors"
+					>Formation</a
+				>
+				<a
+					href="#skills"
+					class="hover:text-brand-purple transition-colors"
+					>Compétences</a
+				>
+				<a
+					href="#projects"
+					class="hover:text-brand-purple transition-colors">Projets</a
+				>
+				<a
+					href="/chat"
+					class="px-3 py-1.5 rounded-lg bg-brand-purple/10 border border-brand-purple/30 text-brand-purple hover:bg-brand-purple hover:text-white transition-all"
+				>
+					🤖 Chat IA
+				</a>
+			</nav>
+		</div>
+	</header>
+
+	<main
+		class="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden"
+	>
+		<Lightfall
+			client:load
+			colors={["#A6C8FF", "#5227FF", "#FF9FFC"]}
+			backgroundColor="#0E0E17"
+			speed={0.4}
+			streakCount={6}
+			streakWidth={1.2}
+			streakLength={1.5}
+			glow={1.2}
+			density={0.5}
+			twinkle={1}
+			zoom={2.5}
+			backgroundGlow={0.4}
+			opacity={1}
+			mouseInteraction={false}
+			mouseStrength={1.2}
+			mouseRadius={0.7}
+		/>
+
+		<div class="text-center max-w-3xl space-y-8 z-10 pt-20">
+			<div class="block py-2">
+				<SplitText
+					client:load
+					text="JULYAN KLEIN"
+					tag="h1"
+					className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]"
+					delay={40}
+					duration={0.6}
+					ease="power4.out"
+					from={{ opacity: 0, y: 30 }}
+					to={{ opacity: 1, y: 0 }}
+				/>
+			</div>
+
+			<p
+				class="text-lg md:text-xl text-brand-text/80 font-normal leading-relaxed max-w-2xl mx-auto"
+			>
+				Étudiant développeur logiciel en <span
+					class="text-brand-purple font-semibold"
+					>BUT Informatique</span
+				> à l’IUT d’Arles. Passionné par l'algorithmique, la conception d'applications
+				robustes et l'administration de systèmes faits maison.
+			</p>
+
+			<div
+				class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4"
+			>
+				<GlareHover
+					client:load
+					glareColor="#ffffff"
+					glareOpacity={0.4}
+					borderRadius="12px"
+					className="w-full sm:w-auto"
+				>
+					<a
+						href="#projects"
+						class="block w-full sm:w-auto px-8 py-3.5 bg-brand-purple text-white font-medium shadow-lg shadow-brand-purple/20 transition-all text-center"
+					>
+						Voir mes projets
+					</a>
+				</GlareHover>
+
+				<GlareHover
+					client:load
+					glareColor="#A6C8FF"
+					glareOpacity={0.3}
+					borderRadius="12px"
+					className="w-full sm:w-auto"
+				>
+					<a
+						href="/chat"
+						class="block w-full sm:w-auto px-8 py-3.5 border border-white/10 bg-white/5 text-brand-text font-medium transition-all text-center"
+					>
+						Discuter avec mon IA
+					</a>
+				</GlareHover>
+			</div>
+		</div>
+	</main>
+
+	<About />
+	<Formation />
+	<Skills />
+	<Project />
+
+	<footer
+		class="py-8 border-t border-white/5 text-center text-sm text-brand-text/40"
+	>
+		<p>© 2026 Julyan KLEIN. Propulsé par Astro & Tailwind CSS.</p>
+	</footer>
+</Layout>
+
+<style is:global>
+	@keyframes gradientShift {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+</style>

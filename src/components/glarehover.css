@@ -1,0 +1,44 @@
+.glare-hover {
+  width: var(--gh-width);
+  height: var(--gh-height);
+  background: var(--gh-bg);
+  border-radius: var(--gh-br);
+  border: 1px solid var(--gh-border);
+  overflow: hidden;
+  position: relative;
+  display: inline-block; /* Changé de grid à inline-block pour respecter le flux des boutons */
+}
+
+.glare-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Crucial pour laisser cliquer le lien en dessous */
+  background: linear-gradient(
+    var(--gh-angle),
+    hsla(0, 0%, 0%, 0) 40%,
+    var(--gh-rgba) 50%,
+    hsla(0, 0%, 0%, 0) 60%
+  );
+  transition: var(--gh-duration) ease;
+  background-size: var(--gh-size) var(--gh-size);
+  background-repeat: no-repeat;
+  background-position: -150% -150%;
+}
+
+.glare-hover:hover {
+  cursor: pointer;
+}
+
+.glare-hover:hover::before {
+  background-position: 150% 150%;
+}
+
+.glare-hover--play-once::before {
+  transition: none;
+}
+
+.glare-hover--play-once:hover::before {
+  transition: var(--gh-duration) ease;
+  background-position: 150% 150%;
+}

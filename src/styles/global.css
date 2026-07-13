@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #0E0E17;
+  --color-brand-card: #161625;
+  --color-brand-text: #EDEBFF;
+  --color-brand-purple: #7C3AED;
+  --color-brand-blue: #3B82F6;
+
+  --font-sans: "Segoe UI", system-ui, sans-serif;
+}

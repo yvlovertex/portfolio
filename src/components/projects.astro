@@ -1,0 +1,49 @@
+---
+import ProjectCard from './projectCard.astro';
+
+// La liste de tes réalisations
+const myProjects = [
+  {
+    title: "Gestionnaire de Bibliothèque",
+    description: "Développement d'une application robuste en C++ permettant la gestion complète d'un catalogue de livres, des adhérents et des emprunts. Focus majeur sur la programmation orientée objet et l'encapsulation.",
+    tags: ["C++", "POO", "Algorithmique"],
+    githubUrl: "#"
+  },
+  {
+    title: "Comparateur d'Algorithmes de Tri",
+    description: "Création d'un outil d'analyse comparative mesurant la complexité empirique de différents algorithmes (Tri à bulles, Rapide, Insertion) en fonction de la taille des structures.",
+    tags: ["C / C++", "Algorithmique", "Optimisation"],
+    githubUrl: "#"
+  },
+  {
+    title: "Serveur Domestique Homelab",
+    description: "Architecture et administration d'un serveur personnel sur Raspberry Pi. Configuration de services conteneurisés avec Docker et mise en place d'une instance Umami Analytics auto-hébergée.",
+    tags: ["Linux", "Docker", "Raspberry Pi"],
+  }
+];
+---
+
+<section id="projects" class="py-24 relative overflow-hidden">
+  <div class="absolute bottom-1/4 right-1/4 -z-10 w-96 h-96 bg-brand-purple/5 blur-[120px] rounded-full"></div>
+
+  <div class="max-w-5xl mx-auto px-6">
+    <!-- En-tête -->
+    <div class="space-y-2 mb-16">
+      <span class="text-xs font-semibold tracking-widest uppercase text-brand-purple">Réalisations</span>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-brand-text">Mes Projets</h2>
+      <div class="h-1 w-12 bg-gradient-to-r from-brand-purple to-brand-blue rounded-full"></div>
+    </div>
+
+    <!-- Grille -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+      {myProjects.map((project) => (
+        <ProjectCard 
+          title={project.title}
+          description={project.description}
+          tags={project.tags}
+          githubUrl={project.githubUrl}
+        />
+      ))}
+    </div>
+  </div>
+</section>
