@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Aurora from '../components/Aurora.jsx';
+import ChatInterface from '../components/ChatInterface.jsx';
+---
+
+<Layout title="AI Assistant - Julyan Klein">
+    <main class="relative min-h-screen w-full bg-[#030014] overflow-hidden flex items-center justify-center p-4">
+        
+        <div class="absolute inset-0 z-0">
+            <Aurora 
+                client:load
+                colorStops={["#7cff67", "#B497CF", "#5227FF"]}
+                blend={1}
+                amplitude={1.2}
+                speed={0.4}
+            />
+            {/* Overlay sombre pour calmer la luminosité sur l'espace de chat */}
+            <div class="absolute inset-0 bg-black/40 z-0 pointer-events-none"></div>
+        </div>
+
+        <div class="relative z-10 w-full">
+            <ChatInterface client:load />
+        </div>
+    </main>
+</Layout>
