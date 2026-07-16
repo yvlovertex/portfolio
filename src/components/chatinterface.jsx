@@ -6,7 +6,7 @@ const INITIAL_MESSAGES = [
   {
     id: 1,
     sender: 'bot',
-    text: "Salut Julyan ! Je suis ton assistant virtuel. Pour l'instant, je tourne en local sur ton navigateur, mais j'ai hâte d'être hébergé sur ton Raspberry Pi. Dis-moi ce que tu veux tester !"
+    text: "Salut ! Je suis désormais connecté en direct à un Raspberry Pi 4. Pose-moi une question, je vais y répondre grâce à Qwen 2.5 !"
   }
 ];
 
@@ -24,7 +24,7 @@ export default function ChatInterface() {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
@@ -38,16 +38,51 @@ export default function ChatInterface() {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulation de la réponse de l'IA après 1.5s
-    setTimeout(() => {
+    try {
+      const response = await fetch("https://ia-api.overtex-vault.duckdns.org/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "qwen2.5:1.5b", // Utilisation de ton modèle Qwen 1.5B léger
+          prompt: userMessage.text,
+          system: "Tu es un assistant virtuel utile, précis et concis. Réponds de manière structurée, logique, et très courte en français (maximum 3 phrases).",
+          stream: false,
+          options: {
+            temperature: 0.1,   // Reste hyper factuel et logique (évite les dérives)
+            top_p: 0.9,
+            num_predict: 150    // Limite le nombre de mots générés pour que la réponse soit super rapide !
+          }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur de réponse de l'IA sur le Raspberry Pi");
+      }
+
+      const data = await response.json();
+      
       setIsTyping(false);
       const botMessage = {
         id: Date.now() + 1,
         sender: 'bot',
-        text: `Message reçu ! "Julyan a dit : ${userMessage.text}". Dès que tu m'auras connecté à ton serveur sur ton Raspberry Pi, je serai capable de traiter cette demande intelligemment !`
+        text: data.response
       };
       setMessages((prev) => [...prev, botMessage]);
-    }, 1500);
+
+    } catch (error) {
+      console.error(error);
+      setIsTyping(false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          sender: 'bot',
+          text: "Mince, je n'ai pas réussi à joindre ton Raspberry Pi. Est-il bien allumé, connecté au réseau ?"
+        }
+      ]);
+    }
   };
 
   return (
@@ -70,7 +105,7 @@ export default function ChatInterface() {
             <div>
               <h2 className="text-white font-semibold text-sm md:text-base leading-none">Julyan's AI Assistant</h2>
               <span className="text-xs text-white/40 flex items-center gap-1.5 mt-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Sandbox Local
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Raspberry Pi 4 (Online)
               </span>
             </div>
           </div>
@@ -141,7 +176,7 @@ export default function ChatInterface() {
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Envoyez un message pour tester..."
+          placeholder="Pose-moi une question..."
           className="flex-1 bg-white/5 border border-white/10 focus:border-brand-purple/50 focus:ring-1 focus:ring-brand-purple/50 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none transition-all"
         />
         <button
