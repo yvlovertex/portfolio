@@ -1,8 +1,7 @@
 ---
-// On organise tes compétences par catégories
 const skillCategories = [
   {
-    title: "Développement",
+    title: "Développement & POO",
     skills: ["C / C++", "Java", "JavaScript", "HTML5 / CSS3", "Tailwind CSS"]
   },
   {
@@ -16,35 +15,44 @@ const skillCategories = [
 ];
 ---
 
-<section id="skills" class="py-24 bg-brand-card/20 border-y border-white/5 relative overflow-hidden">
-  <div class="absolute top-1/4 left-10 -z-10 w-72 h-72 bg-brand-blue/5 blur-[100px] rounded-full"></div>
+<section id="skills" class="py-20 bg-zinc-950 border-t border-white/5 relative overflow-hidden text-white">
+  <!-- Halos lumineux légers en arrière-plan -->
+  <div class="absolute top-1/2 left-10 -translate-y-1/2 -z-10 w-96 h-96 bg-purple-600/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-  <div class="max-w-5xl mx-auto px-6">
+  <div class="max-w-6xl mx-auto px-6">
     
-    <div class="space-y-2 mb-16">
-      <span class="text-xs font-semibold tracking-widest uppercase text-brand-blue">Boîte à outils</span>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-brand-text">Mes Compétences</h2>
-      <br>
-      <div class="h-1 w-12 bg-gradient-to-r from-brand-blue to-brand-purple rounded-full"></div>
+    <!-- En-tête de section -->
+    <div class="mb-12">
+      <span class="text-xs font-bold tracking-widest uppercase text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+        Boîte à outils
+      </span>
+      <h2 class="text-4xl md:text-5xl font-black mt-3">Mes Compétences</h2>
+      <p class="text-zinc-400 mt-2">Technologies, langages et environnements que j'utilise au quotidien.</p>
     </div>
 
+    <!-- Grille des catégories -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {skillCategories.map((category) => (
-        <div class="bg-brand-card/40 border border-white/5 rounded-2xl p-6 backdrop-blur-sm hover:border-brand-blue/20 transition-all duration-300">
-          <h3 class="text-lg font-bold text-brand-blue mb-6 pb-2 border-b border-white/5">
-            {category.title}
-          </h3>
+        <div class="bg-zinc-900/40 border border-white/5 rounded-2xl p-6 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/5 flex flex-col justify-between">
           
-          <ul class="space-y-3.5">
-            {category.skills.map((skill) => (
-              <li class="flex items-center gap-3 group">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-purple shadow-[0_0_8px_rgba(124,58,237,0.8)] group-hover:bg-brand-blue group-hover:shadow-[0_0_8px_rgba(59,130,246,0.8)] transition-all duration-300"></span>
-                <span class="text-brand-text/80 text-md group-hover:text-brand-text transition-colors">
-                  {skill}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-6 pb-3 border-b border-white/10 flex items-center justify-between">
+              <span>{category.title}</span>
+              <span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]"></span>
+            </h3>
+            
+            <ul class="space-y-3.5">
+              {category.skills.map((skill) => (
+                <li class="flex items-center gap-3 group cursor-default">
+                  <span class="w-1.5 h-1.5 rounded-full bg-zinc-600 group-hover:bg-purple-400 group-hover:scale-125 transition-all duration-300"></span>
+                  <span class="text-zinc-300 text-sm group-hover:text-white transition-colors">
+                    {skill}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
       ))}
     </div>
