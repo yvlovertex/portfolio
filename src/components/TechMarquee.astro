@@ -1,0 +1,50 @@
+---
+const technologies = [
+  { name: "Node.js", icon: "https://svgl.app/library/nodejs.svg" },
+  { name: "Docker", icon: "https://svgl.app/library/docker.svg" },
+  { name: "Tailwind CSS", icon: "https://svgl.app/library/tailwindcss.svg" },
+  { name: "HTML", icon: "https://svgl.app/library/html5.svg" },
+  { name: "CSS", icon: "https://svgl.app/library/css.svg" },
+  { name: "JavaScript", icon: "https://svgl.app/library/javascript.svg" },
+  { name: "React.js", icon: "https://svgl.app/library/react.svg" },
+  { name: "MySQL", icon: "https://svgl.app/library/mysql.svg" },
+  { name: "Portainer", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/portainer/portainer-original.svg" },
+  { name: "C++", icon: "https://svgl.app/library/c-plus-plus.svg" },
+  { name: "Assembleur", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
+  { name: "Git", icon: "https://svgl.app/library/git.svg" },
+  { name: "Bash", icon: "https://svgl.app/library/bash.svg" },
+  { name: "Astro", icon: "https://svgl.app/library/astro.svg" },
+];
+
+// Doublement de la liste pour l'effet de boucle infinie fluide
+const marqueeItems = [...technologies, ...technologies];
+---
+
+<!-- Capsule centrale arrondie et esthétique -->
+<div class="relative overflow-hidden py-3 px-4 w-full max-w-4xl mx-auto rounded-full bg-black/40 backdrop-blur-md border border-white/10 shadow-xl">
+  
+  <!-- Masques de dégradé latéral pour adoucir le défilement aux bords -->
+  <div class="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-black/80 to-transparent z-20 rounded-l-full"></div>
+  <div class="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-black/80 to-transparent z-20 rounded-r-full"></div>
+
+  <!-- Carrousel défilant -->
+  <div class="flex animate-scroll w-max will-change-transform">
+    {marqueeItems.map((tech, index) => (
+      <div 
+        class="flex items-center gap-2.5 pr-8 md:pr-12 group transition-all duration-300" 
+        aria-hidden={index >= technologies.length ? "true" : "false"}
+      >
+        <img 
+          src={tech.icon} 
+          alt={tech.name} 
+          class="h-5 w-5 md:h-6 md:w-6 object-contain transition-all group-hover:scale-125 opacity-75 group-hover:opacity-100" 
+          loading={index < 8 ? "eager" : "lazy"} 
+          decoding="async"
+        />
+        <span class="text-xs md:text-sm font-medium text-zinc-300 group-hover:text-purple-300 transition-colors whitespace-nowrap select-none">
+          {tech.name}
+        </span>
+      </div>
+    ))}
+  </div>
+</div>

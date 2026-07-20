@@ -10,6 +10,7 @@ import SplitText from "../components/SplitText.jsx";
 import GlareHover from "../components/GlareHover.jsx";
 import HeroDescription from "../components/HeroDescription.jsx";
 import HeroButtons from '../components/HeroButtons.jsx';
+import TechMarquee from '../components/TechMarquee.astro';
 ---
 
 <Layout title="KLEIN Julyan - Portfolio">
@@ -101,6 +102,10 @@ import HeroButtons from '../components/HeroButtons.jsx';
 			<HeroDescription client:load />
 
 			<HeroButtons client:load />
+
+			<br>
+
+			<TechMarquee client:load />
 		</div>
 	</main>
 
@@ -117,15 +122,23 @@ import HeroButtons from '../components/HeroButtons.jsx';
 </Layout>
 
 <style is:global>
-	@keyframes gradientShift {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
+@keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Animation de défilement infini */
+    @keyframes scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    .animate-scroll {
+        animation: scroll 35s linear infinite;
+    }
+
+    .animate-scroll:hover {
+        animation-play-state: paused;
+    }
 </style>
