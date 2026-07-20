@@ -1,0 +1,62 @@
+---
+import { myProjects } from './projects';
+import Layout from '../layouts/layout.astro'; // Ajuste le chemin vers ton layout global
+
+// Génération des routes dynamiques Astro
+export async function getStaticPaths() {
+  return myProjects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={project.title}>
+  <main class="min-h-screen pt-32 pb-24 text-brand-text max-w-4xl mx-auto px-6">
+    <!-- Bouton Retour -->
+    <a href="/#projects" class="text-sm text-brand-purple hover:text-brand-blue transition-colors inline-flex items-center gap-2 mb-8 group">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transform group-hover:-translate-x-1 transition-transform"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Retour aux projets
+    </a>
+
+    <!-- En-tête projet -->
+    <div class="space-y-4 mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white">{project.title}</h1>
+      <div class="flex flex-wrap gap-2">
+        {project.tags.map((tag) => (
+          <span class="text-xs font-medium px-3 py-1 rounded-md bg-white/5 border border-white/10 text-brand-text/60">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Structure Contenu -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Description & Contenu Principal -->
+      <div class="md:col-span-2 space-y-6 text-brand-text/80 leading-relaxed">
+        <h2 class="text-xl font-semibold text-white">Présentation du projet</h2>
+        <p>{project.description}</p>
+        
+        <div class="p-6 bg-brand-card/40 border border-white/5 rounded-2xl backdrop-blur-sm space-y-2">
+          <h3 class="text-lg font-medium text-brand-purple">Détails techniques</h3>
+          <p class="text-sm text-brand-text/70">
+            Cette section est prête à accueillir une description détaillée de ton architecture logicielle, des problématiques rencontrées et des solutions apportées.
+          </p>
+        </div>
+      </div>
+
+      <!-- Actions & Liens Latéraux -->
+      <div class="space-y-4">
+        {project.githubUrl && (
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 px-4 bg-white/5 hover:bg-brand-purple/20 border border-white/10 rounded-xl font-medium transition-all duration-300 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            Voir le dépôt GitHub
+          </a>
+        )}
+      </div>
+    </div>
+  </main>
+</Layout>

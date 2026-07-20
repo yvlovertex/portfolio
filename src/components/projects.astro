@@ -1,50 +1,59 @@
 ---
-import ProjectCard from './projectCard.astro';
+import InfiniteMenu from './InfiniteMenu.jsx';
 
-// La liste de tes réalisations
-const myProjects = [
+export const myProjects = [
   {
-    title: "Gestionnaire de Bibliothèque",
+    slug: "application-gps",
+    title: "Application de GPS",
     description: "Développement d'une application robuste en C++ permettant la gestion complète d'un catalogue de livres, des adhérents et des emprunts. Focus majeur sur la programmation orientée objet et l'encapsulation.",
     tags: ["C++", "POO", "Algorithmique"],
-    githubUrl: "#"
+    githubUrl: "#",
+    image: "https://picsum.photos/id/10/600/600?grayscale",
+    link: "/projets/application-gps"
   },
   {
-    title: "Comparateur d'Algorithmes de Tri",
+    slug: "messagerie-instantanee",
+    title: "Application de messagerie instantanée",
     description: "Création d'un outil d'analyse comparative mesurant la complexité empirique de différents algorithmes (Tri à bulles, Rapide, Insertion) en fonction de la taille des structures.",
     tags: ["C / C++", "Algorithmique", "Optimisation"],
-    githubUrl: "#"
+    githubUrl: "#",
+    image: "https://picsum.photos/id/48/600/600?grayscale",
+    link: "/projets/messagerie-instantanee"
   },
   {
+    slug: "netflix-likes",
+    title: "Application Netflix Likes",
+    description: "Création d'un outil d'analyse comparative mesurant la complexité empirique de différents algorithmes (Tri à bulles, Rapide, Insertion) en fonction de la taille des structures.",
+    tags: ["C / C++", "Algorithmique", "Optimisation"],
+    githubUrl: "#",
+    image: "https://picsum.photos/id/60/600/600?grayscale",
+    link: "/projets/netflix-likes"
+  },
+  {
+    slug: "homelab",
     title: "Serveur Domestique Homelab",
     description: "Architecture et administration d'un serveur personnel sur Raspberry Pi. Configuration de services conteneurisés avec Docker et mise en place d'une instance Umami Analytics auto-hébergée.",
     tags: ["Linux", "Docker", "Raspberry Pi"],
+    image: "https://picsum.photos/id/160/600/600?grayscale",
+    link: "/projets/homelab"
   }
 ];
 ---
 
-<section id="projects" class="py-24 relative overflow-hidden">
-  <div class="absolute bottom-1/4 right-1/4 -z-10 w-96 h-96 bg-brand-purple/5 blur-[120px] rounded-full"></div>
-
-  <div class="max-w-5xl mx-auto px-6">
-    <!-- En-tête -->
-    <div class="space-y-2 mb-16">
-      <span class="text-xs font-semibold tracking-widest uppercase text-brand-purple">Réalisations</span>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-brand-text">Mes Projets</h2>
-      <br>
-      <div class="h-1 w-12 bg-gradient-to-r from-brand-purple to-brand-blue rounded-full"></div>
+<section id="projects" class="py-24 bg-zinc-950 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- En-tête de section style minimaliste -->
+    <div class="mb-12">
+      <span class="text-xs font-bold tracking-widest uppercase text-purple-500">Portfolio</span>
+      <h2 class="text-4xl font-black text-white mt-1">Projets Récents</h2>
+      <div class="h-1 w-12 bg-purple-600 mt-3 rounded-full"></div>
     </div>
 
-    <!-- Grille -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-      {myProjects.map((project) => (
-        <ProjectCard 
-          title={project.title}
-          description={project.description}
-          tags={project.tags}
-          githubUrl={project.githubUrl}
-        />
-      ))}
+    <!-- Conteneur parent du Canvas 3D (Hauteur fixe requise par WebGL) -->
+    <div class="w-full h-[600px] relative border border-white/5 bg-zinc-900/20 rounded-3xl overflow-hidden backdrop-blur-md">
+      <InfiniteMenu items={myProjects} scale={0.85} client:load />
     </div>
+
   </div>
 </section>
