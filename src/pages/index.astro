@@ -7,128 +7,122 @@ import Project from "../components/projects.astro";
 
 import Lightfall from "../components/Lightfall.jsx";
 import SplitText from "../components/SplitText.jsx";
-import GlareHover from "../components/GlareHover.jsx";
 import HeroDescription from "../components/HeroDescription.jsx";
 import HeroButtons from '../components/HeroButtons.jsx';
 import TechMarquee from '../components/TechMarquee.astro';
 ---
 
 <Layout title="KLEIN Julyan - Portfolio">
-	<header
-		id="navbar"
-		class="fixed w-full z-50 transition-all duration-300 bg-brand-bg/70 backdrop-blur-md border-b border-white/5"
-	>
-		<div
-			class="max-w-7xl mx-auto flex justify-between items-center px-6 py-5"
-		>
-			<div
-				class="text-2xl font-bold tracking-wider bg-gradient-to-r from-brand-purple to-brand-blue bg-clip-text text-transparent"
-			>
-				Portfolio
-			</div>
-			<nav
-				class="hidden md:flex items-center space-x-8 text-md font-medium"
-			>
-				<a
-					href="#hero"
-					class="hover:text-brand-purple transition-colors">Accueil</a
-				>
-				<a
-					href="#about"
-					class="hover:text-brand-purple transition-colors"
-					>À propos</a
-				>
-				<a
-					href="#formation"
-					class="hover:text-brand-purple transition-colors"
-					>Formation</a
-				>
-				<a
-					href="#skills"
-					class="hover:text-brand-purple transition-colors"
-					>Compétences</a
-				>
-				<a
-					href="#projects"
-					class="hover:text-brand-purple transition-colors">Projets</a
-				>
-				<a
-					href="/chat"
-					class="px-3 py-1.5 rounded-lg bg-brand-purple/10 border border-brand-purple/30 text-brand-purple hover:bg-brand-purple hover:text-white transition-all"
-				>
-					🤖 Chat IA
-				</a>
-			</nav>
-		</div>
-	</header>
+    <!-- Navbar Flottante Modernisée -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 transition-all duration-300">
+        <div 
+            id="navbar"
+            class="w-full max-w-5xl flex items-center justify-between px-6 py-3 rounded-full bg-zinc-950/50 backdrop-blur-xl border border-white/10 shadow-[0_2px_8px_0_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.15)] transition-all duration-300"
+        >
+            <!-- Logo / Brand -->
+            <a href="/" class="flex items-center gap-2 group">
+                <span class="text-xl font-black tracking-wider bg-gradient-to-r from-purple-400 via-purple-300 to-indigo-400 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
+                    PORTFOLIO
+                </span>
+            </a>
 
-	<main
-		class="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden"
-	>
-		<Lightfall
-			client:load
-			colors={["#A6C8FF", "#5227FF", "#FF9FFC"]}
-			backgroundColor="#0E0E17"
-			speed={0.4}
-			streakCount={6}
-			streakWidth={1.2}
-			streakLength={1.5}
-			glow={1.2}
-			density={0.5}
-			twinkle={1}
-			zoom={2.5}
-			backgroundGlow={0.4}
-			opacity={1}
-			mouseInteraction={false}
-			mouseStrength={1.2}
-			mouseRadius={0.7}
-		/>
+            <!-- Liens de Navigation -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-zinc-300">
+                <a href="#hero" class="hover:text-white transition-colors">Accueil</a>
+                <a href="#about" class="hover:text-white transition-colors">À propos</a>
+                <a href="#formation" class="hover:text-white transition-colors">Formation</a>
+                <a href="#skills" class="hover:text-white transition-colors">Compétences</a>
+                <a href="#projects" class="hover:text-white transition-colors">Projets</a>
+            </nav>
 
-		<div class="text-center max-w-3xl space-y-8 z-10 pt-20">
-			<div class="block py-2">
-				<SplitText
-					client:load
-					text="JULYAN KLEIN"
-					tag="h1"
-					className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]"
-					delay={40}
-					duration={0.6}
-					ease="power4.out"
-					from={{ opacity: 0, y: 30 }}
-					to={{ opacity: 1, y: 0 }}
-				/>
-			</div>
+            <!-- Bouton d'action -->
+            <div class="flex items-center gap-3">
+                <a
+                    href="/chat"
+                    class="px-4 py-2 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/30 hover:bg-purple-600 hover:text-white hover:border-transparent transition-all duration-300 shadow-lg shadow-purple-500/10"
+                >
+                    🤖 Chat IA
+                </a>
+            </div>
+        </div>
+    </header>
 
-			<HeroDescription client:load />
+    <main id="hero" class="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
+        <Lightfall
+            client:load
+            colors={["#A6C8FF", "#5227FF", "#FF9FFC"]}
+            backgroundColor="#0E0E17"
+            speed={0.4}
+            streakCount={6}
+            streakWidth={1.2}
+            streakLength={1.5}
+            glow={1.2}
+            density={0.5}
+            twinkle={1}
+            zoom={2.5}
+            backgroundGlow={0.4}
+            opacity={1}
+            mouseInteraction={false}
+            mouseStrength={1.2}
+            mouseRadius={0.7}
+        />
 
-			<HeroButtons client:load />
+        <div class="text-center max-w-3xl space-y-8 z-10 pt-28">
+            <div class="block py-2">
+                <SplitText
+                    client:load
+                    text="JULYAN KLEIN"
+                    tag="h1"
+                    className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]"
+                    delay={40}
+                    duration={0.6}
+                    ease="power4.out"
+                    from={{ opacity: 0, y: 30 }}
+                    to={{ opacity: 1, y: 0 }}
+                />
+            </div>
 
-			<br>
+            <HeroDescription client:load />
 
-			<TechMarquee client:load />
-		</div>
-	</main>
+            <HeroButtons client:load />
 
-	<About />
-	<Formation />
-	<Skills />
-	<Project />
+            <br>
 
-	<footer
-		class="py-8 border-t border-white/5 text-center text-sm text-brand-text/40"
-	>
-		<p>© 2026 Julyan KLEIN. Propulsé par Astro & Tailwind CSS.</p>
-	</footer>
+            <TechMarquee client:load />
+        </div>
+    </main>
+
+    <About />
+    <Formation />
+    <Skills />
+    <Project />
+
+    <footer class="py-8 border-t border-white/5 text-center text-sm text-zinc-500">
+        <p>© 2026 Julyan KLEIN. Propulsé par Astro & Tailwind CSS.</p>
+    </footer>
 </Layout>
 
+<!-- Script pour resserrer la navbar au scroll -->
+<script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar?.classList.add('py-2', 'bg-zinc-950/80', 'max-w-3xl');
+            navbar?.classList.remove('py-3', 'bg-zinc-950/50', 'max-w-5xl');
+        } else {
+            navbar?.classList.add('py-3', 'bg-zinc-950/50', 'max-w-5xl');
+            navbar?.classList.remove('py-2', 'bg-zinc-950/80', 'max-w-3xl');
+        }
+    });
+</script>
+
 <style is:global>
-@keyframes gradientShift {
+    @keyframes gradientShift {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
 
-    /* Animation de défilement infini */
     @keyframes scroll {
         from { transform: translateX(0); }
         to { transform: translateX(-50%); }
